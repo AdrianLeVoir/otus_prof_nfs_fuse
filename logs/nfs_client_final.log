@@ -1,0 +1,35 @@
+Script started on 2026-09-27 23:48:08+00:00 [COMMAND="bash /tmp/cli_final.sh" <not executed on terminal>]
++ echo '===== CLIENT final check ====='
+===== CLIENT final check =====
++ echo '--- showmount -a 192.168.1.200 ---'
+--- showmount -a 192.168.1.200 ---
++ showmount -a 192.168.1.200
+All mount points on 192.168.1.200:
+192.168.1.233:/srv/share
++ echo '--- /mnt/upload ---'
+--- /mnt/upload ---
++ ls -la /mnt/upload/
+total 8
+drwxrwxrwx 2 nobody nogroup 4096 Sep 27 23:45 .
+drwxr-xr-x 3 nobody nogroup 4096 Sep 27 23:44 ..
+-rw-r--r-- 1 root   root       0 Sep 27 23:45 check_file
+-rw-r--r-- 1 nobody nogroup    0 Sep 27 23:45 client_file
++ echo '--- mount | grep mnt ---'
+--- mount | grep mnt ---
++ mount
++ grep mnt
+systemd-1 on /mnt type autofs (rw,relatime,fd=65,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=3541)
+192.168.1.200:/srv/share/ on /mnt type nfs (rw,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.1.200,mountvers=3,mountport=50136,mountproto=udp,local_lock=none,addr=192.168.1.200)
++ echo '--- create final_check ---'
+--- create final_check ---
++ touch /mnt/upload/final_check
++ ls -la /mnt/upload/
+total 8
+drwxrwxrwx 2 nobody nogroup 4096 Sep 27 23:48 .
+drwxr-xr-x 3 nobody nogroup 4096 Sep 27 23:44 ..
+-rw-r--r-- 1 root   root       0 Sep 27 23:45 check_file
+-rw-r--r-- 1 nobody nogroup    0 Sep 27 23:45 client_file
+-rw-r--r-- 1 nobody nogroup    0 Sep 27 23:48 final_check
++ set +x
+
+Script done on 2026-09-27 23:48:08+00:00 [COMMAND_EXIT_CODE="0"]

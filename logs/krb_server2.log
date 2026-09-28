@@ -1,0 +1,52 @@
+Script started on 2026-09-27 23:50:04+00:00 [COMMAND="bash /tmp/krb_server2.sh" <not executed on terminal>]
++ echo '===== NFSv4 + krb5 on server ====='
+===== NFSv4 + krb5 on server =====
++ sed -i 's/^#\?Domain *=.*/Domain = otus.local/' /etc/idmapd.conf
++ grep -n -i domain /etc/idmapd.conf
++ head -3
+4:# set your own domain here, if it differs from FQDN minus hostname
+5:# Domain = localdomain
++ mkdir -p /srv/krb5share/upload
++ chown -R nobody:nogroup /srv/krb5share
++ chmod 0777 /srv/krb5share/upload
++ grep -q /srv/krb5share /etc/exports
++ echo '/srv/krb5share 192.168.1.233/32(rw,sync,no_subtree_check,root_squash,sec=krb5)'
++ echo '--- /etc/exports ---'
+--- /etc/exports ---
++ cat /etc/exports
+/srv/share 192.168.1.233/32(rw,sync,root_squash)
+/srv/krb5share 192.168.1.233/32(rw,sync,no_subtree_check,root_squash,sec=krb5)
++ systemctl enable --now rpc-gssd rpc-svcgssd nfs-idmapd
+[0;1;39mThe unit files have no installation config (WantedBy=, RequiredBy=, UpheldBy=,[0m
+[0;1;39mAlso=, or Alias= settings in the [Install] section, and DefaultInstance= for[0m
+[0;1;39mtemplate units). This means they are not meant to be enabled or disabled using systemctl.[0m
+[0;1;39m [0m
+[0;1;39mPossible reasons for having these kinds of units are:[0m
+[0;1;39m• A unit may be statically enabled by being symlinked from another unit's[0m
+[0;1;39m  .wants/, .requires/, or .upholds/ directory.[0m
+[0;1;39m• A unit's purpose may be to act as a helper for some other unit which has[0m
+[0;1;39m  a requirement dependency on it.[0m
+[0;1;39m• A unit may be started when needed via activation (socket, path, timer,[0m
+[0;1;39m  D-Bus, udev, scripted systemctl call, ...).[0m
+[0;1;39m• In case of template units, the unit is meant to be enabled with some[0m
+[0;1;39m  instance name specified.[0m
++ systemctl restart nfs-idmapd rpc-gssd rpc-svcgssd nfs-server
++ exportfs -r
+exportfs: /etc/exports [1]: Neither 'subtree_check' or 'no_subtree_check' specified for export "192.168.1.233/32:/srv/share".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
++ echo '--- exportfs -s ---'
+--- exportfs -s ---
++ exportfs -s
+/srv/share  192.168.1.233/32(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)
+/srv/krb5share  192.168.1.233/32(sync,wdelay,hide,no_subtree_check,sec=krb5,rw,secure,root_squash,no_all_squash)
++ echo '--- services ---'
+--- services ---
++ systemctl is-active rpc-svcgssd nfs-idmapd nfs-server
+active
+active
+active
++ set +x
+
+Script done on 2026-09-27 23:50:05+00:00 [COMMAND_EXIT_CODE="0"]

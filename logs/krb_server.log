@@ -1,0 +1,113 @@
+Script started on 2026-09-27 23:49:16+00:00 [COMMAND="bash /tmp/krb_server.sh" <not executed on terminal>]
++ export DEBIAN_FRONTEND=noninteractive
++ DEBIAN_FRONTEND=noninteractive
++ echo '===== KERBEROS KDC on bellona ====='
+===== KERBEROS KDC on bellona =====
++ grep -q bellona.otus.local /etc/hosts
++ echo '192.168.1.200 bellona.otus.local bellona'
++ tee -a /etc/hosts
+192.168.1.200 bellona.otus.local bellona
++ grep -q irida.otus.local /etc/hosts
++ echo '192.168.1.233 irida.otus.local irida'
++ tee -a /etc/hosts
+192.168.1.233 irida.otus.local irida
++ cat
++ echo 'krb5-config krb5-config/default_realm string OTUS.LOCAL'
++ debconf-set-selections
++ apt-get install -y krb5-kdc krb5-admin-server krb5-user
++ tail -5
+
+User sessions running outdated binaries:
+ adrianl @ session #13: sshd[1556]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ kdb5_util create -s -r OTUS.LOCAL -P OtusKrb5master
++ tail -3
+Initializing database '/var/lib/krb5kdc/principal' for realm 'OTUS.LOCAL',
+master key name 'K/M@OTUS.LOCAL'
++ systemctl enable --now krb5-kdc krb5-admin-server
+Synchronizing state of krb5-kdc.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable krb5-kdc
+Synchronizing state of krb5-admin-server.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable krb5-admin-server
++ sleep 2
++ systemctl is-active krb5-kdc krb5-admin-server
+active
+failed
++ for p in nfs/bellona.otus.local nfs/irida.otus.local host/bellona.otus.local host/irida.otus.local
++ kadmin.local -q 'addprinc -randkey nfs/bellona.otus.local'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+No policy specified for nfs/bellona.otus.local@OTUS.LOCAL; defaulting to no policy
+Principal "nfs/bellona.otus.local@OTUS.LOCAL" created.
++ for p in nfs/bellona.otus.local nfs/irida.otus.local host/bellona.otus.local host/irida.otus.local
++ kadmin.local -q 'addprinc -randkey nfs/irida.otus.local'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+No policy specified for nfs/irida.otus.local@OTUS.LOCAL; defaulting to no policy
+Principal "nfs/irida.otus.local@OTUS.LOCAL" created.
++ for p in nfs/bellona.otus.local nfs/irida.otus.local host/bellona.otus.local host/irida.otus.local
++ kadmin.local -q 'addprinc -randkey host/bellona.otus.local'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+No policy specified for host/bellona.otus.local@OTUS.LOCAL; defaulting to no policy
+Principal "host/bellona.otus.local@OTUS.LOCAL" created.
++ for p in nfs/bellona.otus.local nfs/irida.otus.local host/bellona.otus.local host/irida.otus.local
++ kadmin.local -q 'addprinc -randkey host/irida.otus.local'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+No policy specified for host/irida.otus.local@OTUS.LOCAL; defaulting to no policy
+Principal "host/irida.otus.local@OTUS.LOCAL" created.
++ kadmin.local -q 'addprinc -pw OtusKrb5user adrianl'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+No policy specified for adrianl@OTUS.LOCAL; defaulting to no policy
+Principal "adrianl@OTUS.LOCAL" created.
++ kadmin.local -q 'ktadd -k /etc/krb5.keytab nfs/bellona.otus.local'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+Entry for principal nfs/bellona.otus.local with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab WRFILE:/etc/krb5.keytab.
+Entry for principal nfs/bellona.otus.local with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab WRFILE:/etc/krb5.keytab.
++ kadmin.local -q 'ktadd -k /etc/krb5.keytab host/bellona.otus.local'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+Entry for principal host/bellona.otus.local with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab WRFILE:/etc/krb5.keytab.
+Entry for principal host/bellona.otus.local with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab WRFILE:/etc/krb5.keytab.
++ rm -f /root/irida.keytab
++ kadmin.local -q 'ktadd -k /root/irida.keytab nfs/irida.otus.local'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+Entry for principal nfs/irida.otus.local with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab WRFILE:/root/irida.keytab.
+Entry for principal nfs/irida.otus.local with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab WRFILE:/root/irida.keytab.
++ kadmin.local -q 'ktadd -k /root/irida.keytab host/irida.otus.local'
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+Entry for principal host/irida.otus.local with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab WRFILE:/root/irida.keytab.
+Entry for principal host/irida.otus.local with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab WRFILE:/root/irida.keytab.
++ echo '--- klist -k /etc/krb5.keytab ---'
+--- klist -k /etc/krb5.keytab ---
++ klist -k /etc/krb5.keytab
+Keytab name: FILE:/etc/krb5.keytab
+KVNO Principal
+---- --------------------------------------------------------------------------
+   2 nfs/bellona.otus.local@OTUS.LOCAL
+   2 nfs/bellona.otus.local@OTUS.LOCAL
+   2 host/bellona.otus.local@OTUS.LOCAL
+   2 host/bellona.otus.local@OTUS.LOCAL
++ echo '--- klist -k /root/irida.keytab ---'
+--- klist -k /root/irida.keytab ---
++ klist -k /root/irida.keytab
+Keytab name: FILE:/root/irida.keytab
+KVNO Principal
+---- --------------------------------------------------------------------------
+   2 nfs/irida.otus.local@OTUS.LOCAL
+   2 nfs/irida.otus.local@OTUS.LOCAL
+   2 host/irida.otus.local@OTUS.LOCAL
+   2 host/irida.otus.local@OTUS.LOCAL
++ echo '--- principals ---'
+--- principals ---
++ kadmin.local -q listprincs
+Authenticating as principal root/admin@OTUS.LOCAL with password.
+K/M@OTUS.LOCAL
+adrianl@OTUS.LOCAL
+host/bellona.otus.local@OTUS.LOCAL
+host/irida.otus.local@OTUS.LOCAL
+kadmin/admin@OTUS.LOCAL
+kadmin/changepw@OTUS.LOCAL
+krbtgt/OTUS.LOCAL@OTUS.LOCAL
+nfs/bellona.otus.local@OTUS.LOCAL
+nfs/irida.otus.local@OTUS.LOCAL
++ set +x
+
+Script done on 2026-09-27 23:49:56+00:00 [COMMAND_EXIT_CODE="0"]

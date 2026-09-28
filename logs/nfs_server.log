@@ -1,0 +1,162 @@
+Script started on 2026-09-27 23:44:12+00:00 [COMMAND="bash /tmp/nfss.sh" <not executed on terminal>]
++ echo '===== NFS SERVER SETUP ====='
+===== NFS SERVER SETUP =====
++ hostname -I
+192.168.1.200 172.17.0.1 172.18.0.1 fd00:9f23:ecad:5::452 fd0d:3aa7:fffd:1::452 fd0d:3aa7:fffd:1:be24:11ff:fe52:b0c4 fd00:9f23:ecad:5:be24:11ff:fe52:b0c4 
++ echo '--- install nfs-kernel-server ---'
+--- install nfs-kernel-server ---
++ export DEBIAN_FRONTEND=noninteractive
++ DEBIAN_FRONTEND=noninteractive
++ apt-get update -qq
+E: Failed to fetch https://artifacts.elastic.co/packages/8.x/apt/dists/stable/InRelease  403  Forbidden [IP: 34.120.127.130 443]
+E: The repository 'https://artifacts.elastic.co/packages/8.x/apt stable InRelease' is no longer signed.
++ apt-get install -y nfs-kernel-server
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 0%Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  apache2 apache2-bin apache2-data apache2-utils libapache2-mod-php8.3
+  libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64
+  liblua5.4-0 nginx-common php-common php8.3 php8.3-cli php8.3-common
+  php8.3-opcache php8.3-readline ssl-cert
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  keyutils libevent-core-2.1-7t64 libnfsidmap1 libtirpc-common libtirpc3t64
+  nfs-common rpcbind
+Suggested packages:
+  watchdog
+The following NEW packages will be installed:
+  keyutils libevent-core-2.1-7t64 libnfsidmap1 libtirpc-common libtirpc3t64
+  nfs-common nfs-kernel-server rpcbind
+0 upgraded, 8 newly installed, 0 to remove and 195 not upgraded.
+Need to get 751 kB of archives.
+After this operation, 2540 kB of additional disk space will be used.
+0% [Working]            Get:1 http://ru.archive.ubuntu.com/ubuntu noble-updates/main amd64 libevent-core-2.1-7t64 amd64 2.1.12-stable-9ubuntu2.1 [91.8 kB]
+0% [1 libevent-core-2.1-7t64 2089 B/91.8 kB 2%]                                               12% [Working]             Get:2 http://ru.archive.ubuntu.com/ubuntu noble-updates/main amd64 libnfsidmap1 amd64 1:2.6.4-3ubuntu5.1 [48.3 kB]
+12% [2 libnfsidmap1 2090 B/48.3 kB 4%]                                      20% [Waiting for headers]                         Get:3 http://ru.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-common all 1.3.4+ds-1.1build1 [8094 B]
+20% [3 libtirpc-common 4187 B/8094 B 52%]                                         23% [Waiting for headers]                         Get:4 http://ru.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc3t64 amd64 1.3.4+ds-1.1build1 [82.6 kB]
+23% [4 libtirpc3t64 1806 B/82.6 kB 2%]                                      35% [Waiting for headers]                         Get:5 http://ru.archive.ubuntu.com/ubuntu noble/main amd64 rpcbind amd64 1.2.6-7ubuntu2 [46.5 kB]
+35% [5 rpcbind 2274 B/46.5 kB 5%]                                 42% [Waiting for headers]                         Get:6 http://ru.archive.ubuntu.com/ubuntu noble/main amd64 keyutils amd64 1.6.3-3build1 [56.8 kB]
+42% [6 keyutils 1380 B/56.8 kB 2%]                                  51% [Waiting for headers]                         Get:7 http://ru.archive.ubuntu.com/ubuntu noble-updates/main amd64 nfs-common amd64 1:2.6.4-3ubuntu5.1 [248 kB]
+51% [7 nfs-common 2270 B/248 kB 1%]                                   79% [Waiting for headers]                         Get:8 http://ru.archive.ubuntu.com/ubuntu noble-updates/main amd64 nfs-kernel-server amd64 1:2.6.4-3ubuntu5.1 [169 kB]
+79% [8 nfs-kernel-server 226 B/169 kB 0%]96% [8 nfs-kernel-server 151 kB/169 kB 89%]                                           100% [Working]              Fetched 751 kB in 1s (555 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libevent-core-2.1-7t64:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 80836 files and directories currently installed.)
+Preparing to unpack .../0-libevent-core-2.1-7t64_2.1.12-stable-9ubuntu2.1_amd64.deb ...
+Unpacking libevent-core-2.1-7t64:amd64 (2.1.12-stable-9ubuntu2.1) ...
+Selecting previously unselected package libnfsidmap1:amd64.
+Preparing to unpack .../1-libnfsidmap1_1%3a2.6.4-3ubuntu5.1_amd64.deb ...
+Unpacking libnfsidmap1:amd64 (1:2.6.4-3ubuntu5.1) ...
+Selecting previously unselected package libtirpc-common.
+Preparing to unpack .../2-libtirpc-common_1.3.4+ds-1.1build1_all.deb ...
+Unpacking libtirpc-common (1.3.4+ds-1.1build1) ...
+Selecting previously unselected package libtirpc3t64:amd64.
+Preparing to unpack .../3-libtirpc3t64_1.3.4+ds-1.1build1_amd64.deb ...
+Adding 'diversion of /lib/x86_64-linux-gnu/libtirpc.so.3 to /lib/x86_64-linux-gnu/libtirpc.so.3.usr-is-merged by libtirpc3t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libtirpc.so.3.0.0 to /lib/x86_64-linux-gnu/libtirpc.so.3.0.0.usr-is-merged by libtirpc3t64'
+Unpacking libtirpc3t64:amd64 (1.3.4+ds-1.1build1) ...
+Selecting previously unselected package rpcbind.
+Preparing to unpack .../4-rpcbind_1.2.6-7ubuntu2_amd64.deb ...
+Unpacking rpcbind (1.2.6-7ubuntu2) ...
+Selecting previously unselected package keyutils.
+Preparing to unpack .../5-keyutils_1.6.3-3build1_amd64.deb ...
+Unpacking keyutils (1.6.3-3build1) ...
+Selecting previously unselected package nfs-common.
+Preparing to unpack .../6-nfs-common_1%3a2.6.4-3ubuntu5.1_amd64.deb ...
+Unpacking nfs-common (1:2.6.4-3ubuntu5.1) ...
+Selecting previously unselected package nfs-kernel-server.
+Preparing to unpack .../7-nfs-kernel-server_1%3a2.6.4-3ubuntu5.1_amd64.deb ...
+Unpacking nfs-kernel-server (1:2.6.4-3ubuntu5.1) ...
+Setting up libnfsidmap1:amd64 (1:2.6.4-3ubuntu5.1) ...
+Setting up libtirpc-common (1.3.4+ds-1.1build1) ...
+Setting up keyutils (1.6.3-3build1) ...
+Setting up libevent-core-2.1-7t64:amd64 (2.1.12-stable-9ubuntu2.1) ...
+Setting up libtirpc3t64:amd64 (1.3.4+ds-1.1build1) ...
+Setting up rpcbind (1.2.6-7ubuntu2) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/rpcbind.service → /usr/lib/systemd/system/rpcbind.service.
+Created symlink /etc/systemd/system/sockets.target.wants/rpcbind.socket → /usr/lib/systemd/system/rpcbind.socket.
+Setting up nfs-common (1:2.6.4-3ubuntu5.1) ...
+
+Creating config file /etc/idmapd.conf with new version
+
+Creating config file /etc/nfs.conf with new version
+info: Selecting UID from range 100 to 999 ...
+
+info: Adding system user `statd' (UID 106) ...
+info: Adding new user `statd' (UID 106) with group `nogroup' ...
+info: Not creating home directory `/var/lib/nfs'.
+Created symlink /etc/systemd/system/multi-user.target.wants/nfs-client.target → /usr/lib/systemd/system/nfs-client.target.
+Created symlink /etc/systemd/system/remote-fs.target.wants/nfs-client.target → /usr/lib/systemd/system/nfs-client.target.
+auth-rpcgss-module.service is a disabled or a static unit, not starting it.
+nfs-idmapd.service is a disabled or a static unit, not starting it.
+nfs-utils.service is a disabled or a static unit, not starting it.
+proc-fs-nfsd.mount is a disabled or a static unit, not starting it.
+rpc-gssd.service is a disabled or a static unit, not starting it.
+rpc-statd-notify.service is a disabled or a static unit, not starting it.
+rpc-statd.service is a disabled or a static unit, not starting it.
+rpc-svcgssd.service is a disabled or a static unit, not starting it.
+Setting up nfs-kernel-server (1:2.6.4-3ubuntu5.1) ...
+Created symlink /etc/systemd/system/nfs-mountd.service.requires/fsidd.service → /usr/lib/systemd/system/fsidd.service.
+Created symlink /etc/systemd/system/nfs-server.service.requires/fsidd.service → /usr/lib/systemd/system/fsidd.service.
+Created symlink /etc/systemd/system/nfs-client.target.wants/nfs-blkmap.service → /usr/lib/systemd/system/nfs-blkmap.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /usr/lib/systemd/system/nfs-server.service.
+nfs-mountd.service is a disabled or a static unit, not starting it.
+nfsdcld.service is a disabled or a static unit, not starting it.
+
+Creating config file /etc/exports with new version
+
+Creating config file /etc/default/nfs-kernel-server with new version
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
+Scanning processes... [                                                        ]Scanning processes... [                                                        ]Scanning processes... [                                                        ]Scanning processes... [=                                                       ]Scanning processes... [=                                                       ]Scanning processes... [=                                                       ]Scanning processes... [==                                                      ]Scanning processes... [==                                                      ]Scanning processes... [===                                                     ]Scanning processes... [===                                                     ]Scanning processes... [===                                                     ]Scanning processes... [====                                                    ]Scanning processes... [====                                                    ]Scanning processes... [====                                                    ]Scanning processes... [=====                                                   ]Scanning processes... [=====                                                   ]Scanning processes... [======                                                  ]Scanning processes... [======                                                  ]Scanning processes... [======                                                  ]Scanning processes... [=======                                                 ]Scanning processes... [=======                                                 ]Scanning processes... [=======                                                 ]Scanning processes... [========                                                ]Scanning processes... [========                                                ]Scanning processes... [=========                                               ]Scanning processes... [=========                                               ]Scanning processes... [=========                                               ]Scanning processes... [==========                                              ]Scanning processes... [==========                                              ]Scanning processes... [==========                                              ]Scanning processes... [===========                                             ]Scanning processes... [===========                                             ]Scanning processes... [============                                            ]Scanning processes... [============                                            ]Scanning processes... [============                                            ]Scanning processes... [=============                                           ]Scanning processes... [=============                                           ]Scanning processes... [=============                                           ]Scanning processes... [==============                                          ]Scanning processes... [==============                                          ]Scanning processes... [===============                                         ]Scanning processes... [===============                                         ]Scanning processes... [===============                                         ]Scanning processes... [================                                        ]Scanning processes... [================                                        ]Scanning processes... [================                                        ]Scanning processes... [=================                                       ]Scanning processes... [=================                                       ]Scanning processes... [==================                                      ]Scanning processes... [==================                                      ]Scanning processes... [==================                                      ]Scanning processes... [===================                                     ]Scanning processes... [===================                                     ]Scanning processes... [===================                                     ]Scanning processes... [====================                                    ]Scanning processes... [====================                                    ]Scanning processes... [=====================                                   ]Scanning processes... [=====================                                   ]Scanning processes... [=====================                                   ]Scanning processes... [======================                                  ]Scanning processes... [======================                                  ]Scanning processes... [======================                                  ]Scanning processes... [=======================                                 ]Scanning processes... [=======================                                 ]Scanning processes... [========================                                ]Scanning processes... [========================                                ]Scanning processes... [========================                                ]Scanning processes... [=========================                               ]Scanning processes... [=========================                               ]Scanning processes... [=========================                               ]Scanning processes... [==========================                              ]Scanning processes... [==========================                              ]Scanning processes... [===========================                             ]Scanning processes... [===========================                             ]Scanning processes... [===========================                             ]Scanning processes... [============================                            ]Scanning processes... [============================                            ]Scanning processes... [============================                            ]Scanning processes... [=============================                           ]Scanning processes... [=============================                           ]Scanning processes... [==============================                          ]Scanning processes... [==============================                          ]Scanning processes... [==============================                          ]Scanning processes... [===============================                         ]Scanning processes... [===============================                         ]Scanning processes... [===============================                         ]Scanning processes... [================================                        ]Scanning processes... [================================                        ]Scanning processes... [=================================                       ]Scanning processes... [=================================                       ]Scanning processes... [=================================                       ]Scanning processes... [==================================                      ]Scanning processes... [==================================                      ]Scanning processes... [==================================                      ]Scanning processes... [===================================                     ]Scanning processes... [===================================                     ]Scanning processes... [====================================                    ]Scanning processes... [====================================                    ]Scanning processes... [====================================                    ]Scanning processes... [=====================================                   ]Scanning processes... [=====================================                   ]Scanning processes... [=====================================                   ]Scanning processes... [======================================                  ]Scanning processes... [======================================                  ]Scanning processes... [=======================================                 ]Scanning processes... [=======================================                 ]Scanning processes... [=======================================                 ]Scanning processes... [========================================                ]Scanning processes... [========================================                ]Scanning processes... [========================================                ]Scanning processes... [=========================================               ]Scanning processes... [=========================================               ]Scanning processes... [==========================================              ]Scanning processes... [==========================================              ]Scanning processes... [==========================================              ]Scanning processes... [===========================================             ]Scanning processes... [===========================================             ]Scanning processes... [===========================================             ]Scanning processes... [============================================            ]Scanning processes... [============================================            ]Scanning processes... [=============================================           ]Scanning processes... [=============================================           ]Scanning processes... [=============================================           ]Scanning processes... [==============================================          ]Scanning processes... [==============================================          ]Scanning processes... [==============================================          ]Scanning processes... [===============================================         ]Scanning processes... [===============================================         ]Scanning processes... [================================================        ]Scanning processes... [================================================        ]Scanning processes... [================================================        ]Scanning processes... [=================================================       ]Scanning processes... [=================================================       ]Scanning processes... [=================================================       ]Scanning processes... [==================================================      ]Scanning processes... [==================================================      ]Scanning processes... [===================================================     ]Scanning processes... [===================================================     ]Scanning processes... [===================================================     ]Scanning processes... [====================================================    ]Scanning processes... [====================================================    ]Scanning processes... [====================================================    ]Scanning processes... [=====================================================   ]Scanning processes... [=====================================================   ]Scanning processes... [======================================================  ]Scanning processes... [======================================================  ]Scanning processes... [======================================================  ]Scanning processes... [======================================================= ]Scanning processes... [======================================================= ]Scanning processes... [========================================================]Scanning processes...                                                           
+Scanning linux images... [                                                     ]Scanning linux images... [=================                                    ]Scanning linux images... [===================================                  ]Scanning linux images... [=====================================================]Scanning linux images...                                                        
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ echo '--- prepare exported directory ---'
+--- prepare exported directory ---
++ mkdir -p /srv/share/upload
++ chown -R nobody:nogroup /srv/share
++ chmod 0777 /srv/share/upload
++ ls -ld /srv/share /srv/share/upload
+drwxr-xr-x 3 nobody nogroup 4096 Sep 27 23:44 /srv/share
+drwxrwxrwx 2 nobody nogroup 4096 Sep 27 23:44 /srv/share/upload
++ echo '--- /etc/exports ---'
+--- /etc/exports ---
++ cat
++ cat /etc/exports
+/srv/share 192.168.1.233/32(rw,sync,root_squash)
++ exportfs -r
+exportfs: /etc/exports [1]: Neither 'subtree_check' or 'no_subtree_check' specified for export "192.168.1.233/32:/srv/share".
+  Assuming default behaviour ('no_subtree_check').
+  NOTE: this default has changed since nfs-utils version 1.0.x
+
++ echo '--- exportfs -s (actual exports) ---'
+--- exportfs -s (actual exports) ---
++ exportfs -s
+/srv/share  192.168.1.233/32(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)
++ echo '--- listening ports 111/2049 ---'
+--- listening ports 111/2049 ---
++ ss -tnplu
++ grep -E ':2049|:111'
+udp   UNCONN 0      0                                  0.0.0.0:111        0.0.0.0:*    users:(("rpcbind",pid=2203,fd=5),("systemd",pid=1,fd=166))
+udp   UNCONN 0      0                                     [::]:111           [::]:*    users:(("rpcbind",pid=2203,fd=7),("systemd",pid=1,fd=168))
+tcp   LISTEN 0      4096                               0.0.0.0:111        0.0.0.0:*    users:(("rpcbind",pid=2203,fd=4),("systemd",pid=1,fd=164))
+tcp   LISTEN 0      64                                 0.0.0.0:2049       0.0.0.0:*                                                              
+tcp   LISTEN 0      4096                                  [::]:111           [::]:*    users:(("rpcbind",pid=2203,fd=6),("systemd",pid=1,fd=167))
+tcp   LISTEN 0      64                                    [::]:2049          [::]:*                                                              
++ echo '--- service ---'
+--- service ---
++ systemctl enable --now nfs-server
++ systemctl is-active nfs-server
+active
++ set +x
+
+Script done on 2026-09-27 23:44:49+00:00 [COMMAND_EXIT_CODE="0"]

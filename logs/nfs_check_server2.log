@@ -1,0 +1,18 @@
+Script started on 2026-09-27 23:45:29+00:00 [COMMAND="bash /tmp/srv_check2.sh" <not executed on terminal>]
++ echo '===== SERVER: verify client_file ====='
+===== SERVER: verify client_file =====
++ ls -la /srv/share/upload/
+total 8
+drwxrwxrwx 2 nobody nogroup 4096 Sep 27 23:45 .
+drwxr-xr-x 3 nobody nogroup 4096 Sep 27 23:44 ..
+-rw-r--r-- 1 root   root       0 Sep 27 23:45 check_file
+-rw-r--r-- 1 nobody nogroup    0 Sep 27 23:45 client_file
++ test -f /srv/share/upload/client_file
++ echo 'OK: client_file visible on server'
+OK: client_file visible on server
++ showmount -a localhost
+All mount points on localhost:
+192.168.1.233:/srv/share
++ set +x
+
+Script done on 2026-09-27 23:45:29+00:00 [COMMAND_EXIT_CODE="0"]

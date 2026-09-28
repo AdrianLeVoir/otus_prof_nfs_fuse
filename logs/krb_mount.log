@@ -1,0 +1,37 @@
+Script started on 2026-09-27 23:50:46+00:00 [COMMAND="bash /tmp/krb_mount.sh" <not executed on terminal>]
++ echo '===== kinit + NFSv4 mount (sec=krb5) ====='
+===== kinit + NFSv4 mount (sec=krb5) =====
++ echo OtusKrb5user
++ kinit adrianl@OTUS.LOCAL
+Password for adrianl@OTUS.LOCAL: 
++ klist
+Ticket cache: FILE:/tmp/krb5cc_0
+Default principal: adrianl@OTUS.LOCAL
+
+Valid starting       Expires              Service principal
+09/27/2026 23:50:46  09/28/2026 09:50:46  krbtgt/OTUS.LOCAL@OTUS.LOCAL
+	renew until 09/28/2026 23:50:46
++ echo '--- idmapd status ---'
+--- idmapd status ---
++ systemctl is-active nfs-idmapd
+inactive
++ pgrep -a rpc.idmapd
++ echo 'rpc.idmapd not running'
+rpc.idmapd not running
++ echo '--- mount nfs4 ---'
+--- mount nfs4 ---
++ mkdir -p /mnt/krb5
++ mount -t nfs4 -o vers=4.2,sec=krb5 192.168.1.200:/srv/krb5share /mnt/krb5
++ mount
++ grep krb5
+192.168.1.200:/srv/krb5share on /mnt/krb5 type nfs4 (rw,relatime,vers=4.2,rsize=524288,wsize=524288,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=krb5,clientaddr=192.168.1.233,local_lock=none,addr=192.168.1.200)
++ echo '--- access ---'
+--- access ---
++ ls -la /mnt/krb5/
+total 12
+drwxr-xr-x 3 nobody nogroup 4096 Sep 27 23:50 .
+drwxr-xr-x 4 nobody nogroup 4096 Sep 27 23:50 ..
+drwxrwxrwx 2 nobody nogroup 4096 Sep 27 23:50 upload
++ set +x
+
+Script done on 2026-09-27 23:50:46+00:00 [COMMAND_EXIT_CODE="0"]

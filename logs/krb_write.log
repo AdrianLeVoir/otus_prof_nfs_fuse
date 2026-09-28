@@ -1,0 +1,33 @@
+Script started on 2026-09-27 23:50:52+00:00 [COMMAND="bash /tmp/krb_write.sh" <not executed on terminal>]
++ echo '===== write test as adrianl (kerberos) ====='
+===== write test as adrianl (kerberos) =====
++ sudo -u adrianl bash -c 'echo OtusKrb5user | kinit adrianl@OTUS.LOCAL >/dev/null 2>&1; klist | head -4; touch /mnt/krb5/upload/krb5_client_file && echo '\''WRITE OK'\''; ls -la /mnt/krb5/upload/'
+Ticket cache: FILE:/tmp/krb5cc_1000
+Default principal: adrianl@OTUS.LOCAL
+
+Valid starting       Expires              Service principal
+WRITE OK
+total 8
+drwxrwxrwx 2 nobody nogroup 4096 Sep 27 23:50 .
+drwxr-xr-x 3 nobody nogroup 4096 Sep 27 23:50 ..
+-rw-rw-r-- 1 nobody nogroup    0 Sep 27 23:50 krb5_client_file
++ echo '--- idmapd unit ---'
+--- idmapd unit ---
++ systemctl cat nfs-idmapd.service
++ head -20
+# /usr/lib/systemd/system/nfs-idmapd.service
+[Unit]
+Description=NFSv4 ID-name mapping service
+DefaultDependencies=no
+Requires=rpc_pipefs.target
+After=rpc_pipefs.target local-fs.target network-online.target
+Wants=network-online.target
+
+BindsTo=nfs-server.service
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/rpc.idmapd
++ set +x
+
+Script done on 2026-09-27 23:50:52+00:00 [COMMAND_EXIT_CODE="0"]

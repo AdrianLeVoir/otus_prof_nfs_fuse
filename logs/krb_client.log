@@ -1,0 +1,51 @@
+Script started on 2026-09-27 23:50:19+00:00 [COMMAND="bash /tmp/krb_client.sh" <not executed on terminal>]
++ export DEBIAN_FRONTEND=noninteractive
++ DEBIAN_FRONTEND=noninteractive
++ echo '===== KERBEROS CLIENT on irida ====='
+===== KERBEROS CLIENT on irida =====
++ grep -q bellona.otus.local /etc/hosts
++ echo '192.168.1.200 bellona.otus.local bellona'
++ tee -a /etc/hosts
+192.168.1.200 bellona.otus.local bellona
++ grep -q irida.otus.local /etc/hosts
++ echo '192.168.1.233 irida.otus.local irida'
++ tee -a /etc/hosts
+192.168.1.233 irida.otus.local irida
++ cat
++ echo 'krb5-config krb5-config/default_realm string OTUS.LOCAL'
++ debconf-set-selections
++ apt-get install -y krb5-user
++ tail -3
+ adrianl @ session #12: sshd[1529]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
++ cp /tmp/irida.keytab /etc/krb5.keytab
++ chmod 600 /etc/krb5.keytab
++ chown root:root /etc/krb5.keytab
++ sed -i 's/^# *Domain *=.*/Domain = otus.local/' /etc/idmapd.conf
++ grep -n '^Domain' /etc/idmapd.conf
+5:Domain = otus.local
++ systemctl enable --now rpc-gssd nfs-idmapd
++ tail -2
+  instance name specified.
+Failed to start nfs-idmapd.service: Unit nfs-server.service not found.
++ systemctl restart nfs-idmapd rpc-gssd
+[0;1;31mFailed to restart nfs-idmapd.service: Unit nfs-server.service not found.[0m
++ echo '--- keytab ---'
+--- keytab ---
++ klist -k /etc/krb5.keytab
+Keytab name: FILE:/etc/krb5.keytab
+KVNO Principal
+---- --------------------------------------------------------------------------
+   2 nfs/irida.otus.local@OTUS.LOCAL
+   2 nfs/irida.otus.local@OTUS.LOCAL
+   2 host/irida.otus.local@OTUS.LOCAL
+   2 host/irida.otus.local@OTUS.LOCAL
++ echo '--- services ---'
+--- services ---
++ systemctl is-active rpc-gssd nfs-idmapd
+active
+inactive
++ set +x
+
+Script done on 2026-09-27 23:50:37+00:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,27 @@
+Script started on 2026-09-27 23:47:13+00:00 [COMMAND="bash /tmp/srv_reboot.sh" <not executed on terminal>]
++ echo '===== SERVER after reboot ====='
+===== SERVER after reboot =====
++ hostname -I
+192.168.1.200 172.18.0.1 172.17.0.1 fd00:9f23:ecad:5::452 fd0d:3aa7:fffd:1::452 fd0d:3aa7:fffd:1:be24:11ff:fe52:b0c4 fd00:9f23:ecad:5:be24:11ff:fe52:b0c4 
++ ls -la /srv/share/upload/
+total 8
+drwxrwxrwx 2 nobody nogroup 4096 Sep 27 23:45 .
+drwxr-xr-x 3 nobody nogroup 4096 Sep 27 23:44 ..
+-rw-r--r-- 1 root   root       0 Sep 27 23:45 check_file
+-rw-r--r-- 1 nobody nogroup    0 Sep 27 23:45 client_file
++ echo '--- exportfs -s ---'
+--- exportfs -s ---
++ exportfs -s
+/srv/share  192.168.1.233/32(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,root_squash,no_all_squash)
++ echo '--- showmount -a 192.168.1.200 ---'
+--- showmount -a 192.168.1.200 ---
++ showmount -a 192.168.1.200
+All mount points on 192.168.1.200:
+192.168.1.233:/srv/share
++ echo '--- nfs-server ---'
+--- nfs-server ---
++ systemctl is-active nfs-server
+active
++ set +x
+
+Script done on 2026-09-27 23:47:13+00:00 [COMMAND_EXIT_CODE="0"]
