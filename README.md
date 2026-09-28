@@ -28,26 +28,25 @@
 ## Описание каталогов и файлов репозитория
 
 ```
-hw3/
-├── README.md            — этот отчёт
-├── nfss_script.sh       — bash-скрипт конфигурирования NFS-сервера
-├── nfsc_script.sh       — bash-скрипт конфигурирования NFS-клиента
-├── krb5_server.sh       — ⭐ Kerberos KDC + экспорт NFSv4(sec=krb5) на сервере
-├── krb5_client.sh       — ⭐ настройка NFSv4(sec=krb5)-клиента + kinit + монтирование
-└── logs/                — логи выполнения, снятые утилитой script
-    ├── nfs_server.log            — установка и настройка сервера (NFSv3)
-    ├── nfs_client.log            — установка и настройка клиента (NFSv3)
-    ├── nfs_check_server1.log     — создание check_file на сервере
-    ├── nfs_check_client1.log     — проверка/создание client_file на клиенте
-    ├── nfs_check_server2.log     — проверка client_file и showmount на сервере
-    ├── nfs_client_reboot.log     — клиент после перезагрузки
-    ├── nfs_server_reboot.log     — сервер после перезагрузки
-    ├── nfs_client_final.log      — финальная проверка клиента + final_check
-    ├── krb_server.log            — ⭐ установка KDC, принципалы, keytab
-    ├── krb_server2.log           — ⭐ idmapd и экспорт sec=krb5
-    ├── krb_client.log            — ⭐ настройка клиента Kerberos
-    ├── krb_mount.log             — ⭐ kinit + монтирование NFSv4 sec=krb5
-    └── krb_write.log             — ⭐ запись в /mnt/krb5/upload от имени adrianl
+README.md            — этот отчёт
+nfss_script.sh       — bash-скрипт конфигурирования NFS-сервера
+nfsc_script.sh       — bash-скрипт конфигурирования NFS-клиента
+krb5_server.sh       — ⭐ Kerberos KDC + экспорт NFSv4(sec=krb5) на сервере
+krb5_client.sh       — ⭐ настройка NFSv4(sec=krb5)-клиента + kinit + монтирование
+logs/                — логи выполнения, снятые утилитой script
+  ├── nfs_server.log            — установка и настройка сервера (NFSv3)
+  ├── nfs_client.log            — установка и настройка клиента (NFSv3)
+  ├── nfs_check_server1.log     — создание check_file на сервере
+  ├── nfs_check_client1.log     — проверка/создание client_file на клиенте
+  ├── nfs_check_server2.log     — проверка client_file и showmount на сервере
+  ├── nfs_client_reboot.log     — клиент после перезагрузки
+  ├── nfs_server_reboot.log     — сервер после перезагрузки
+  ├── nfs_client_final.log      — финальная проверка клиента + final_check
+  ├── krb_server.log            — ⭐ установка KDC, принципалы, keytab
+  ├── krb_server2.log           — ⭐ idmapd и экспорт sec=krb5
+  ├── krb_client.log            — ⭐ настройка клиента Kerberos
+  ├── krb_mount.log             — ⭐ kinit + монтирование NFSv4 sec=krb5
+  └── krb_write.log             — ⭐ запись в /mnt/krb5/upload от имени adrianl
 ```
 
 ## Реализация
